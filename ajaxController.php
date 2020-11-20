@@ -1,8 +1,38 @@
 <?php
 
+    // ******************************************************
+    // // // // // // Default & Detected // // // // // //
+    // ******************************************************
+
+    $LANGUAGES_AVILABLE     = ['hu','us','de'];
+    $LANGUAGE_DEFAULT       = $LANGUAGES_AVILABLE[0];
+    $LANGUAGE_DETECTED      = false;
+
+    if (file_exists('php/geoPlugin.php')) {
+
+        require('php/geoPlugin.php');
+
+        $geoData = getClientGeoData( getClientAddress() );
+
+        if ( $geoData !== false && isset($geoData['alpha2']) ) {
+    
+            $LANGUAGE_DETECTED = strtolower($geoData['alpha2']);
+    
+            if ( !in_array($LANGUAGE_DETECTED, $LANGUAGES_AVILABLE) ) {
+                $LANGUAGE_DETECTED = $LANGUAGE_DEFAULT;
+            }
+            
+        }
+
+    }
+
+    // ******************************************************
+    // // // // // // Ajax // // // // // //
+    // ******************************************************
+
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         response(false,false,false,
-            "Request rejected! Invalid method. 🚨"
+            'Request rejected! Invalid method. 🚨'
         );
     }
 
@@ -16,7 +46,7 @@
     $_POST['DATA'] = json_decode($_POST['DATA'],true);
 
     // ******************************************************
-    // // // // // // logic // // // // // //
+    // // // // // // Ajax Endpoint // // // // // //
     // ******************************************************
     
 
@@ -63,8 +93,6 @@
     // CtoL
     function CtoL() {
 
-        $debug = [];
-
         $res = [];
         $lang = $_POST['INFO'];
         $langFilePath = 'lang/CtoL/' . $lang . '/';
@@ -73,8 +101,6 @@
 
             $file = $langFilePath . $k . '.json';
             $fileParsed = [];
-
-            array_push($debug,$file);
 
             if (file_exists($file)) {
                 $fileParsed = json_decode(file_get_contents($file),true);
@@ -93,13 +119,13 @@
 
         }
 
-        response(true,$debug,$res);
+        response(true,false,$res);
 
     }
 
 
     // ******************************************************
-    // // // // // // response // // // // // //
+    // // // // // // Ajax Response // // // // // //
     // ******************************************************
 
     function response(
