@@ -1,0 +1,14 @@
+{
+    "mainTitle":
+    {
+        "hu": "A fő cím!",
+        "us": "The main title!",
+        "de": "Der Haupttitel!"
+    },
+    "mainDesc":
+    {
+        "hu": "A kis leírás.",
+        "us": "The little description.",
+        "de": "Die kleine Beschreibung."
+    }
+}

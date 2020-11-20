@@ -1,0 +1,26 @@
+{
+    "leftTitle":
+    {
+        "hu": "bal cím",
+        "us": "left title",
+        "de": "linker Titel"
+    },
+    "leftDesc":
+    {
+        "hu": "A kis leírás.",
+        "us": "The little description.",
+        "de": "Die kleine Beschreibung."
+    },
+    "rightTitle":
+    {
+        "hu": "jobb cím",
+        "us": "right title",
+        "de": "richtiger Titel"
+    },
+    "rightDesc":
+    {
+        "hu": "A kis leírás.",
+        "us": "The little description.",
+        "de": "Die kleine Beschreibung."
+    }
+}
